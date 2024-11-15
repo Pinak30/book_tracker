@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('signup/', signup_view, name='signup'),
+    path('book/<int:id>/update-progress/', update_progress, name='update_progress'),
 ]
 

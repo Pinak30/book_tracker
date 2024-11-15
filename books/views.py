@@ -98,6 +98,26 @@ def delete_book(request, id):
     return render(request, 'book_confirm_delete.html', {'book': book})
 
 
+@login_required
+def update_progress(request, id):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        messages.error(request, "The book you're trying to update progress for does not exist.")
+        return redirect('book_list')
+
+    if request.method == 'POST':
+        progress = request.POST.get('progress')
+        if progress:
+            book.progress = progress
+            book.save()
+            messages.success(request, "Progress updated successfully.")
+        else:
+            messages.error(request, "Progress cannot be empty.")
+        return redirect('book_detail', id=book.id)
+    return render(request, 'update_progress.html', {'book': book})
+
+
 def logout_view(request):
     logout(request)
     messages.success(request, 'Successfully logged out.')

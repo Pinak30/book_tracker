@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Update Progress for "{{ book.title }}"</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="progress">Progress</label>
+            <input type="text" class="form-control" id="progress" name="progress" value="{{ book.progress }}" placeholder="E.g., '50% completed' or 'Chapter 5 of 20'">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'book_detail' book.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
