@@ -7,17 +7,36 @@
 
     <!-- Bootstrap 4.5.2 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom Styles (if needed) -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40 !important;
+        }
+        .navbar .nav-link, .navbar-brand {
+            color: #ffffff !important;
+        }
+        .navbar .nav-link:hover {
+            color: #d3d3d3 !important;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+        }
+        footer a {
+            color: #ffc107;
+        }
+    </style>
 
-    <!-- Include any other head elements -->
-    {% block head %}
-    {% endblock %}
+    {% block head %}{% endblock %}
 </head>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'book_list' %}">Book Tracker</a>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{% url 'book_list' %}"><i class="fas fa-book"></i> Book Tracker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,27 +44,29 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'book_list' %}">Home</a>
+                    <a class="nav-link" href="{% url 'book_list' %}"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_book' %}">Add Book</a>
+                    <a class="nav-link" href="{% url 'favorites_list' %}"><i class="fas fa-heart"></i> Favorites</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'add_book' %}"><i class="fas fa-plus"></i> Add Book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="nav-link" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Sign Up</a>
                 </li>
             {% endif %}
         </ul>
     </div>
 </nav>
 
-<!-- Flash messages (if any) -->
 {% if messages %}
     <div class="container mt-3">
         {% for message in messages %}
@@ -59,25 +80,17 @@
     </div>
 {% endif %}
 
-<!-- Main Content -->
-<div class="container">
-    {% block content %}
-    {% endblock %}
+<div class="container my-4">
+    {% block content %}{% endblock %}
 </div>
 
-<!-- Footer -->
-<footer class="bg-light text-center py-3">
-    <p>&copy; 2024 Book Tracker. All rights reserved.</p>
+<footer class="text-center py-3">
+    <p>&copy; 2024 Book Tracker. Developed with <i class="fas fa-heart text-danger"></i> by Pinak Pimputkar.</p>
 </footer>
 
-<!-- Bootstrap 4 JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- Any custom JS scripts (if needed) -->
-{% block scripts %}
-{% endblock %}
-
+{% block scripts %}{% endblock %}
 </body>
 </html>

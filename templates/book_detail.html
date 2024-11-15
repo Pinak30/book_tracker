@@ -3,14 +3,25 @@
 {% block title %}Book Details{% endblock %}
 
 {% block content %}
-<h2>{{ book.title }}</h2>
-<p><strong>Author:</strong> {{ book.author }}</p>
-<p><strong>Genre:</strong> {{ book.genre }}</p>
-<p><strong>Status:</strong> {{ book.status }}</p>
-{% if book.date_started %}<p><strong>Date Started:</strong> {{ book.date_started }}</p>{% endif %}
-{% if book.date_finished %}<p><strong>Date Finished:</strong> {{ book.date_finished }}</p>{% endif %}
-
-<a href="{% url 'edit_book' book.id %}" class="btn btn-warning">Edit</a>
-<a href="{% url 'delete_book' book.id %}" class="btn btn-danger">Delete</a>
-<a href="{% url 'book_list' %}" class="btn btn-secondary">Back to List</a>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title">{{ book.title }}</h2>
+            <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+            <p class="card-text"><strong>Genre:</strong> {{ book.genre }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ book.status }}</p>
+            {% if book.date_started %}
+                <p class="card-text"><strong>Date Started:</strong> {{ book.date_started }}</p>
+            {% endif %}
+            {% if book.date_finished %}
+                <p class="card-text"><strong>Date Finished:</strong> {{ book.date_finished }}</p>
+            {% endif %}
+            <div class="mt-4">
+                <a href="{% url 'edit_book' book.id %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                <a href="{% url 'delete_book' book.id %}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                <a href="{% url 'book_list' %}" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left"></i> Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

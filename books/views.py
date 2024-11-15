@@ -38,8 +38,15 @@ def signup_view(request):
 
 
 def book_list(request):
-    books = Book.objects.all()
-    return render(request, 'book_list.html', {'books': books})
+    books_read = Book.objects.filter(status="R")
+    books_wanting_to_read = Book.objects.filter(status="WR")
+    books_currently_reading = Book.objects.filter(status="CR")
+    return render(request, 'book_list.html', {
+        'books_read': books_read,
+        'books_wanting_to_read': books_wanting_to_read,
+        'books_currently_reading': books_currently_reading,
+    })
+
 
 
 def book_detail(request, id):
@@ -116,6 +123,31 @@ def update_progress(request, id):
             messages.error(request, "Progress cannot be empty.")
         return redirect('book_detail', id=book.id)
     return render(request, 'update_progress.html', {'book': book})
+
+
+@login_required
+def toggle_favorite(request, id):
+    try:
+        book = Book.objects.get(id=id)
+    except Book.DoesNotExist:
+        messages.error(request, "Book does not exist.")
+        return redirect('book_list')
+
+    if request.user in book.favorited_by.all():
+        book.favorited_by.remove(request.user)
+        messages.success(request, f"{book.title} has been removed from your favorites.")
+    else:
+        book.favorited_by.add(request.user)
+        messages.success(request, f"{book.title} has been added to your favorites.")
+
+    return redirect('book_list')
+
+
+@login_required
+def favorites_list(request):
+    favorite_books = request.user.favorite_books.all()
+    return render(request, 'favorites_list.html', {'books': favorite_books})
+
 
 
 def logout_view(request):

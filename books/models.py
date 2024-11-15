@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -17,3 +18,4 @@ class Book(models.Model):
     date_started = models.DateField(null=True, blank=True)
     date_finished = models.DateField(null=True, blank=True)
     progress = models.CharField(max_length=100, blank=True, null=True, help_text="E.g., '50% completed' or 'Chapter 5 of 20'")
+    favorited_by = models.ManyToManyField(User, related_name="favorite_books", blank=True)

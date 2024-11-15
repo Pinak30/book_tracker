@@ -28,5 +28,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('signup/', signup_view, name='signup'),
     path('book/<int:id>/update-progress/', update_progress, name='update_progress'),
+    path('toggle-favorite/<int:id>/', toggle_favorite, name='toggle_favorite'),
+    path('favorites/', favorites_list, name='favorites_list'),
 ]
 
