@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-bgv8kcw$l+vyzl0hx+m_j$od4g5$%b0v-&dfdwrj-x%=h*-gv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'book-tracker-t9ob.onrender.com' ]
 
 
 # Application definition
