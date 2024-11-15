@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Details{% endblock %}
+
+{% block content %}
+<h2>{{ book.title }}</h2>
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p><strong>Genre:</strong> {{ book.genre }}</p>
+<p><strong>Status:</strong> {{ book.status }}</p>
+{% if book.date_started %}<p><strong>Date Started:</strong> {{ book.date_started }}</p>{% endif %}
+{% if book.date_finished %}<p><strong>Date Finished:</strong> {{ book.date_finished }}</p>{% endif %}
+
+<a href="{% url 'edit_book' book.id %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'delete_book' book.id %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'book_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}
